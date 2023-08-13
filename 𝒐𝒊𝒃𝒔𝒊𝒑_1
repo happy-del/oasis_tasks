@@ -1,0 +1,31 @@
+
+
+from sklearn.preprocessing import StandardScaler
+from sklearn import datasets
+import numpy as np
+import pandas as pd
+
+
+iris=pd.read_csv("C:/Users/Dell/OneDrive/Documents/archive/Iris1.csv") # load the csv file 
+print("Target Labels", iris["Species"].unique()) # printing the target 
+x=iris.drop("Species",axis=1)
+y=iris["Species"]
+#x=iris.iloc[:,:4].values
+#y=iris.iloc[:,0:4].values
+x=iris.iloc[:,[0,1,2,3]].values  # features
+y=iris.iloc[:,4].values  # target
+#print(x)
+#print(y)
+# classifying the data using KNN algorithm
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0) # splitting the data into train & test datasets
+from sklearn.neighbors import KNeighborsClassifier
+knn=KNeighborsClassifier(n_neighbors=5)
+knn.fit(x_train,y_train)
+KNeighborsClassifier()
+new_obs=np.array([[4.9, 2.2, 3.8, 1.1]]) # providing new data for classification
+prediction=knn.predict(new_obs)
+print(prediction)
+
+
+
