@@ -1,0 +1,28 @@
+#Firstly importing the requried libraries
+import pandas 
+import matplotlib.pyplot as plt
+import seaborn as sb
+ 
+data=pandas.read_csv("C:/Users/Dell/Downloads/archive (1)/Unemployment_India.csv")
+print(data.head())
+print(data.tail())
+
+# We will process the data by checking null values in the dataset
+print("\nChecking the null values : \n",data.isnull().sum())  
+
+# Now we will clear the null values in dataset
+data.dropna(axis=0,inplace=True)
+print("\nChecking the null values again: \n",data.isnull().sum())  
+
+data.columns= ["Region", "Date", "Frequency",  
+               "Unemployed",  
+               "Employed",  
+               "Estimate Labour Participation Rate",  
+               "Area"]  
+
+# Now lets anaylze the unemployment rate
+plt.figure(figsize=(12, 10))  
+plt.title("Unemployment Rate")  
+sb.histplot(x="Unemployed", hue="Area", data=data)  
+plt.show()  
+
